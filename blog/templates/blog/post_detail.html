@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% extends 'blog/base_blog.html' %}
+    {% block body_block %}
+        <article class="media content-section container jumbotron mt-3">
+            <img src="{{ object.author.profile.image.url }}" alt="author" class="rounded-circle article-img mr-2" style = "width: 50px; height: 50px;">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a href="{% url 'blog:user-posts' object.author.username %}" class="mr-2"> {{ object.author}} </a>
+                    <small class="text-muted"> {{ object.date_posted}} </small>
+                
+                    {% if object.author == user %}
+                    <div>
+                        <a href="{% url 'blog:post-update' object.id %}" class="btn btn-secondary btn-sm mt-1 mb-1">Update</a>
+                        <a href="{% url 'blog:post-delete' object.id %}" class="btn btn-danger btn-sm mt-1 mb-1">Delete</a>
+                    </div>
+                    {% endif %}
+                </div>
+                <h2 class="article-title">{{object.title}}</h2>
+                <p class="article-content"> {{object.content}} </p>
+            </div>
+        </article>
+    {% endblock %}
